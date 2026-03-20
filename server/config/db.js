@@ -17,13 +17,13 @@ async function connectDB() {
     if (!client) {
       client = new MongoClient(uri);
       await client.connect();
-      database = client.db("easypass");
+      database = client.db(process.env.DB_NAME || "easypass");
       console.log("✅ MongoDB connected");
     }
     return database;
   } catch (error) {
     console.error("❌ MongoDB connection error:", error.message);
-    process.exit(1);
+    throw (error)
   }
 }
 
